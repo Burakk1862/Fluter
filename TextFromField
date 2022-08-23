@@ -1,0 +1,19 @@
+var _TextFormFieldKey = GlobalKey(); // atamayı bu şekilde yaparız
+
+  Kullanımı
+_TextFormFieldKey.currentState.value; //şeklinde çağırıp bu form alanındaki girilen değere ulaşabiliriz.
+
+TextFormField({
+        key: _TextFormFieldKey // bu form alanı için benzersiz anahtar/kimlik
+        controller, //Düzenlenmekte olan metni kontrol etmek için TextEditingController turunden metin kontol edicisi. 
+        obscureText: true, // true ise girilen yazıyı gizler. şifre gizleme de kullanılır.
+        decoration: const InputDecoration( // dekorasyon metin girişi kutusunu biçimlendirebilmemize olanak sağlar.
+                          icon: const Icon(Icons.calendar_today), // icon alır
+                          hintText: 'Enter your date of birth', // küçülen yazı
+                          labelText: 'Dob', // metin girilmeye başlayınca silinecek yazı. Arama kutularındaki "lütfen bir kelime girin" şeklindeki bir yazı gilince silinen yazı.
+                        ),
+
+        validator: (value) {  if (value.isEmpty) {  return 'Bu alanı boş bıraktınız!'; } },// Bir girişi doğrulayan isteğe bağlı bir yöntem. Girdi geçersizse veya aksi takdirde null olursa görüntülemek için bir hata dizesi döndürür.Bu form alanına girilen değeri yakalayabilir ve kontrol edebiliriz.
+        keyboardType: TextInputType.datetime, // klavye tipini atabileceğimiz parametre
+        onSaved: (value) { setState(() { _girilendeger = value; }); }, // Form kaydedildiğinde çalışır. Bu form alanına girilen değeri yakalayabilir ve kaydedebiliriz.
+      }) 
